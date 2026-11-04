@@ -1,13 +1,4 @@
-import type { GenericStatus } from "@/enums/GenericStatus";
+import type { ReservationResponseDto } from "@/dtos/tour-management/ReservationResponseDto";
 
-export interface Reservation {
-  id: number;
-  reservationNumber: string;
-  tour: { id: number; tourNumber: string; title: string };
-  user: { id: number; name: string };
-  requestedSlots: number;
-  totalPrice: number;
-  status: GenericStatus;
-  bookingDate: string;
-  holdExpiresAt?: string | null;
-}
+/** Reservation as the server sends it; generated from the server DTO. */
+export type Reservation = ReservationResponseDto;

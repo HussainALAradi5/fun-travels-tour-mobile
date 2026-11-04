@@ -11,7 +11,7 @@ export function ReservationCard({ reservation, onPress }: ReservationCardProps) 
     <Pressable accessibilityRole="button" accessibilityLabel={`Open booking ${reservation.reservationNumber}`} onPress={onPress}>
       <Card>
         <StatusBadge status={reservation.status} />
-        <Text style={{ color: theme.text, fontSize: 17, fontWeight: "700" }}>{reservation.tour.title}</Text>
+        <Text style={{ color: theme.text, fontSize: 17, fontWeight: "700" }}>{reservation.tour?.title ?? reservation.reservationNumber}</Text>
         <Text style={{ color: theme.muted }}>{reservation.reservationNumber} - booked {formatDateTime(reservation.bookingDate)}</Text>
         <Text style={{ color: theme.text }}>{reservation.requestedSlots} traveler(s) - {formatMoney(reservation.totalPrice)}</Text>
       </Card>

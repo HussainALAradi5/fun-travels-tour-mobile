@@ -5,7 +5,8 @@ export const ENDPOINTS = {
     register: "/auth/register",
     passwordResetRequest: "/auth/password-reset/request",
   },
-  users: { byId: (id: number) => `/users/${id}` },
+  users: { byId: (id: number) => `/users/${id}`, myProfile: "/users/me/profile" },
+  countries: "/countries",
   tours: { catalog: "/tours/catalog", byId: (id: number) => `/tours/${id}` },
   seats: { search: "/seats/search" },
   reservations: {

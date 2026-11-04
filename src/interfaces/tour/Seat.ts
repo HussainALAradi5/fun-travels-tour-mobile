@@ -1,9 +1,4 @@
-import type { SeatStatus } from "@/enums/SeatStatus";
+import type { SeatResponseDto } from "@/dtos/tour-management/SeatResponseDto";
 
-export interface Seat {
-  id: number;
-  seatCode: string;
-  chairType: string;
-  status: SeatStatus;
-  seatPriceModifier: number;
-}
+/** Seat as the server sends it; generated from the server DTO. */
+export type Seat = SeatResponseDto;

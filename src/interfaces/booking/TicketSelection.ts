@@ -1,7 +1,4 @@
-import type { EntityReference } from "../common/EntityReference";
+import type { TicketSelectionRequestDto } from "@/dtos/tour-management/TicketSelectionRequestDto";
 
-/** One traveler. Prices are always calculated by the server. */
-export interface TicketSelection {
-  assignedSeat?: EntityReference;
-  selectedMeals?: EntityReference[];
-}
+/** TicketSelection as the server sends it; generated from the server DTO. */
+export type TicketSelection = TicketSelectionRequestDto;

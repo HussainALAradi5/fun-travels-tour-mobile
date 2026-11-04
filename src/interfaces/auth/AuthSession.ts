@@ -1,6 +1,4 @@
-import type { User } from "../user/User";
+import type { AuthResponseDto } from "@/dtos/auth/AuthResponseDto";
 
-export interface AuthSession {
-  token: string;
-  user: User;
-}
+/** AuthSession as the server sends it; generated from the server DTO. */
+export type AuthSession = AuthResponseDto;

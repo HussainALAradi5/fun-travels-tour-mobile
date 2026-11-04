@@ -1,7 +1,4 @@
-export interface Account {
-  id: number;
-  accountNumber: string;
-  accountName: string;
-  balance: number;
-  status: string;
-}
+import type { AccountResponseDto } from "@/dtos/payment/AccountResponseDto";
+
+/** Account as the server sends it; generated from the server DTO. */
+export type Account = AccountResponseDto;

@@ -1,8 +1,4 @@
-import type { EntityReference } from "../common/EntityReference";
-import type { TicketSelection } from "./TicketSelection";
+import type { ReservationCreateRequestDto } from "@/dtos/tour-management/ReservationCreateRequestDto";
 
-export interface ReservationCreateRequest {
-  tour: EntityReference;
-  requestedSlots?: number;
-  tickets?: TicketSelection[];
-}
+/** ReservationCreateRequest as the server sends it; generated from the server DTO. */
+export type ReservationCreateRequest = ReservationCreateRequestDto;

@@ -1,16 +1,4 @@
-import type { TicketStatus } from "@/enums/TicketStatus";
+import type { TicketResponseDto } from "@/dtos/tour-management/TicketResponseDto";
 
-export interface Ticket {
-  id: number;
-  ticketNumber: string;
-  tour: { id: number; tourNumber: string; title: string };
-  assignedSeat?: { id: number; seatCode: string } | null;
-  basePrice: number;
-  discountPrice: number;
-  seatPriceModifier: number;
-  totalPrice: number;
-  paid: boolean;
-  ticketStatus: TicketStatus;
-  hasMealPlan: boolean;
-  qrCode?: string;
-}
+/** Ticket as the server sends it; generated from the server DTO. */
+export type Ticket = TicketResponseDto;

@@ -25,7 +25,7 @@ export default function BookingDetailScreen() {
     <Screen>
       <Card>
         <StatusBadge status={reservation.status} />
-        <Text style={{ color: theme.text, fontSize: 20, fontWeight: "800" }}>{reservation.tour.title}</Text>
+        <Text style={{ color: theme.text, fontSize: 20, fontWeight: "800" }}>{reservation.tour?.title ?? reservation.reservationNumber}</Text>
         <Text style={{ color: theme.muted }}>{reservation.reservationNumber}</Text>
         <Text style={{ color: theme.text }}>Total {formatMoney(reservation.totalPrice)}</Text>
         {pending && reservation.holdExpiresAt ? (

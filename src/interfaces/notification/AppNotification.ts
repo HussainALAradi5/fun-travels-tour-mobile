@@ -1,10 +1,4 @@
-export interface AppNotification {
-  id: number;
-  title: string;
-  message: string;
-  type: string;
-  referenceType?: string;
-  referenceId?: number;
-  isRead: boolean;
-  createdAt: string;
-}
+import type { NotificationResponseDto } from "@/dtos/notification/NotificationResponseDto";
+
+/** AppNotification as the server sends it; generated from the server DTO. */
+export type AppNotification = NotificationResponseDto;
