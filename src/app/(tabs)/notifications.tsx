@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { FlatList, Pressable, StyleSheet, Text } from "react-native";
 import { Card } from "@/components/common/Card";
 import { StateView } from "@/components/common/StateView";
@@ -7,6 +8,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useNotifications } from "@/hooks/useNotifications";
 import { useTheme } from "@/hooks/useTheme";
 import { formatDateTime } from "@/utilities/format";
+import { notificationRoute } from "@/utilities/notificationRoute";
 
 export default function NotificationsScreen() {
   const theme = useTheme();
@@ -22,8 +24,12 @@ export default function NotificationsScreen() {
       onRefresh={reload}
       refreshing={loading && items.length > 0}
       renderItem={({ item }) => (
-        <Pressable accessibilityRole="button" accessibilityHint={item.isRead ? undefined : "Marks as read"}
-          onPress={() => (item.isRead ? undefined : void markRead(item.id))}>
+        <Pressable accessibilityRole="button" accessibilityHint="Opens the related item and marks it as read"
+          onPress={() => {
+            if (!item.isRead) void markRead(item.id);
+            const target = notificationRoute(item);
+            if (target) router.push(target);
+          }}>
           <Card>
             <Text style={{ color: theme.text, fontWeight: item.isRead ? "400" : "800" }}>{item.title}</Text>
             <Text style={{ color: theme.muted }}>{item.message}</Text>

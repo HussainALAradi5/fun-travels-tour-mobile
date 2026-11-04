@@ -38,5 +38,12 @@ export function useAuthSession(): AuthContextValue {
     await signIn({ identifier: request.email, password: request.password });
   }, [signIn]);
 
-  return useMemo(() => ({ user, restoring, signIn, register, signOut }), [user, restoring, signIn, register, signOut]);
+  const updateUser = useCallback(async (next: User) => {
+    const token = await sessionStorage.token();
+    if (token) await sessionStorage.save(token, JSON.stringify(next));
+    setUser(next);
+  }, []);
+
+  return useMemo(() => ({ user, restoring, signIn, register, signOut, updateUser }),
+    [user, restoring, signIn, register, signOut, updateUser]);
 }

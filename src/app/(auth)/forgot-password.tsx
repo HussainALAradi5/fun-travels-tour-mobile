@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { useState } from "react";
 import { Alert, Text } from "react-native";
 import { Button } from "@/components/common/Button";
@@ -21,6 +22,8 @@ export default function ForgotPasswordScreen() {
       <Text style={{ color: theme.text }}>We will email a reset link. Open it on any device to choose a new password.</Text>
       <TextField label="Email" autoCapitalize="none" keyboardType="email-address" value={email} onChangeText={setEmail} />
       <Button label="Send reset link" onPress={send} disabled={!email.trim()} loading={pending} />
+      <Button label="I have a reset code" variant="outline"
+        onPress={() => router.push({ pathname: "/(auth)/reset-password", params: { email: email.trim() } })} />
     </Screen>
   );
 }

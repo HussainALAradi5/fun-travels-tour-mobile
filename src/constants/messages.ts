@@ -10,6 +10,15 @@ export const MESSAGES = {
   cancelReservationBody: "Paid bookings are refunded to your wallet: full refund more than 14 days before departure, 50% from 7 to 14 days, none inside 7 days.",
   cancelTicketTitle: "Cancel this ticket?",
   resetSent: "If an account uses this email, a reset link has been sent.",
+  resetDone: "Your password was changed. Sign in with the new password.",
+  topUpOnWeb: "Refunds land here. Top up by card from the web app.",
+  emptyPayments: "No payments yet.",
+  emptyRequests: "No support requests yet.",
+  emptyComments: "No replies yet.",
+  emptyReports: "No reports yet. Use Export on bookings, wallet, or tours.",
+  deleteRequestTitle: "Delete this request?",
+  deleteReportTitle: "Delete this report?",
+  profileSaved: "Profile updated.",
 } as const;
 
 export const MAX_TRAVELERS = 20;

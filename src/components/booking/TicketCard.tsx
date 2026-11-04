@@ -9,7 +9,7 @@ import { StatusBadge } from "../common/StatusBadge";
 
 const QR_SIZE = 160;
 
-export function TicketCard({ ticket, onCancel }: TicketCardProps) {
+export function TicketCard({ ticket, onCancel, onView }: TicketCardProps) {
   const theme = useTheme();
   const active = ticket.ticketStatus !== TicketStatus.CANCELLED && ticket.ticketStatus !== TicketStatus.COMPLETED;
   return (
@@ -20,6 +20,7 @@ export function TicketCard({ ticket, onCancel }: TicketCardProps) {
       {ticket.paid && active && ticket.qrCode ? (
         <Image accessibilityLabel={`QR code for ticket ${ticket.ticketNumber}`} source={{ uri: ticket.qrCode }} style={styles.qr} />
       ) : null}
+      {onView ? <Button label="Boarding pass" variant="outline" onPress={onView} /> : null}
       {active && onCancel ? <Button label="Cancel ticket" variant="danger" onPress={onCancel} /> : null}
     </Card>
   );

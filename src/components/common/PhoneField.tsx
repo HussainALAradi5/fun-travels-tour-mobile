@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { FlatList, Modal, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { MOBILE_HINT } from "@/constants/phone";
 import { RADIUS, SPACING, TOUCH_TARGET } from "@/constants/theme";
 import { useDialCodes } from "@/hooks/useDialCodes";
 import { useTheme } from "@/hooks/useTheme";
 import type { PhoneFieldProps } from "@/interfaces/props/PhoneFieldProps";
-import { TextField } from "./TextField";
+import { SelectSheet } from "./SelectSheet";
 
 /** Phone number with a country-code picker; reports the full "+<code><number>" value. */
 export function PhoneField({ label, value, onChange, error }: PhoneFieldProps) {
   const theme = useTheme();
-  const dial = useDialCodes();
+  const dial = useDialCodes(value);
   const [open, setOpen] = useState(false);
   const code = dial.selected?.dialCode ?? "";
   const local = value.startsWith(code) ? value.slice(code.length) : value.replace(/^\+/, "");
@@ -28,21 +28,9 @@ export function PhoneField({ label, value, onChange, error }: PhoneFieldProps) {
           onChangeText={(text) => onChange(`${code}${text.replace(/[^0-9]/g, "")}`)} />
       </View>
       <Text style={{ color: error ? theme.danger : theme.muted }}>{error ?? MOBILE_HINT}</Text>
-      <Modal visible={open} animationType="slide" onRequestClose={() => setOpen(false)}>
-        <View style={[styles.sheet, { backgroundColor: theme.background }]}>
-          <TextField label="Search country" value={dial.query} onChangeText={dial.setQuery} autoCapitalize="none" />
-          <FlatList data={dial.visible} keyExtractor={(c) => String(c.id)} renderItem={({ item }) => (
-            <Pressable accessibilityRole="button" style={styles.item} onPress={() => {
-              dial.setSelected(item);
-              onChange(`${item.dialCode}${local}`);
-              setOpen(false);
-            }}>
-              <Text style={{ color: theme.text }}>{item.famousName}</Text>
-              <Text style={{ color: theme.muted }}>{item.dialCode}</Text>
-            </Pressable>
-          )} />
-        </View>
-      </Modal>
+      <SelectSheet visible={open} title="Country code" items={dial.countries} label={(c) => c.famousName}
+        detail={(c) => c.dialCode} keyOf={(c) => String(c.id)} onClose={() => setOpen(false)}
+        onSelect={(country) => { dial.setSelected(country); onChange(`${country.dialCode}${local}`); setOpen(false); }} />
     </View>
   );
 }
@@ -53,6 +41,4 @@ const styles = StyleSheet.create({
   row: { flexDirection: "row", gap: SPACING.sm },
   code: { minHeight: TOUCH_TARGET, minWidth: 72, borderWidth: 1, borderRadius: RADIUS.md, alignItems: "center", justifyContent: "center" },
   input: { flex: 1, minHeight: TOUCH_TARGET, borderWidth: 1, borderRadius: RADIUS.md, paddingHorizontal: SPACING.md, fontSize: 16 },
-  sheet: { flex: 1, padding: SPACING.lg, paddingTop: SPACING.xl * 2, gap: SPACING.md },
-  item: { minHeight: TOUCH_TARGET, flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
 });

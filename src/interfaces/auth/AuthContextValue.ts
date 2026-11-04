@@ -8,4 +8,6 @@ export interface AuthContextValue {
   signIn: (request: LoginRequest) => Promise<void>;
   register: (request: RegisterRequest) => Promise<void>;
   signOut: () => Promise<void>;
+  /** Stores a refreshed user (after a profile edit) without signing in again. */
+  updateUser: (user: User) => Promise<void>;
 }

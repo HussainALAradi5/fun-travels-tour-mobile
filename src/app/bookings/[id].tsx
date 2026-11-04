@@ -1,4 +1,4 @@
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { Text } from "react-native";
 import { TicketCard } from "@/components/booking/TicketCard";
 import { Button } from "@/components/common/Button";
@@ -34,7 +34,8 @@ export default function BookingDetailScreen() {
       </Card>
       {pending ? <Button label="Pay with wallet" onPress={actions.pay} loading={actions.pending} /> : null}
       {(detail.tickets.data?.content ?? []).map((ticket) => (
-        <TicketCard key={ticket.id} ticket={ticket} onCancel={cancellable ? () => actions.cancelTicket(ticket.id) : undefined} />
+        <TicketCard key={ticket.id} ticket={ticket} onView={() => router.push(`/tickets/${ticket.id}`)}
+          onCancel={cancellable ? () => actions.cancelTicket(ticket.id) : undefined} />
       ))}
       {cancellable ? <Button label="Cancel reservation" variant="danger" onPress={actions.cancel} loading={actions.pending} /> : null}
     </Screen>
