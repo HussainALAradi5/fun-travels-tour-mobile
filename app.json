@@ -1,13 +1,14 @@
 {
   "expo": {
-    "name": "fun-travels-tour-mobile",
+    "name": "Fun Travels Tour",
     "slug": "fun-travels-tour-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.funtravelstour.mobile"
     },
     "android": {
       "adaptiveIcon": {
@@ -16,10 +17,16 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.funtravelstour.mobile"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store"
+    ],
+    "scheme": "funtravelstour"
   }
 }
