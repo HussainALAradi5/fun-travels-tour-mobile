@@ -4,11 +4,17 @@ export interface SelectSheetProps<T> {
   items: T[];
   /** Text shown for an item and matched by the search box. */
   label: (item: T) => string;
-  /** Optional right-hand detail, such as a dial code. */
+  /** Optional right-hand detail, such as a dial code; also matched by the search box. */
   detail?: (item: T) => string;
   /** Optional leading image, such as a country flag. */
   image?: (item: T) => string | null | undefined;
   keyOf: (item: T) => string;
+  /** Key of the current choice; that row is ticked. */
+  selectedKey?: string;
+  /** When set, a first row with this label clears the choice (e.g. "Any country"). */
+  clearLabel?: string;
+  onClear?: () => void;
+  searchPlaceholder?: string;
   onSelect: (item: T) => void;
   onClose: () => void;
 }

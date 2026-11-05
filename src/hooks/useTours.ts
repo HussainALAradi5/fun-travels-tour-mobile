@@ -12,7 +12,7 @@ export function useTours() {
   const load = useCallback(() => tourService.catalog({ ...filter, size: PAGE_SIZE }), [filter]);
   const result = useAsync(load);
   const update = (patch: TourCatalogFilter) => setFilter((current) => ({ ...current, ...patch }));
-  /** Dates apply once complete (YYYY-MM-DD); clearing the field removes the filter. */
+  /** Dates come from the calendar as YYYY-MM-DD; an empty value removes the filter. */
   const setDate = (key: "startDate" | "endDate", text: string) => {
     if (text === "" || ISO_DATE.test(text)) update({ [key]: text || undefined });
   };

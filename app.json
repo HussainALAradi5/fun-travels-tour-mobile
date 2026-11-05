@@ -32,7 +32,8 @@
         {
           "photosPermission": "Allow Fun Travels Tour to use your photos for your profile picture."
         }
-      ]
+      ],
+      "@react-native-community/datetimepicker"
     ],
     "scheme": "funtravelstour"
   }

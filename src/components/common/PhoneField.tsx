@@ -31,7 +31,8 @@ export function PhoneField({ label, value, onChange, error }: PhoneFieldProps) {
       </View>
       <Text style={{ color: error ? theme.danger : theme.muted }}>{error ?? MOBILE_HINT}</Text>
       <SelectSheet visible={open} title="Country code" items={dial.countries} label={(c) => c.famousName}
-        detail={(c) => c.dialCode} image={(c) => c.flagPngUrl} keyOf={(c) => String(c.id)} onClose={() => setOpen(false)}
+        detail={(c) => c.dialCode} image={(c) => c.flagPngUrl} keyOf={(c) => String(c.id)} selectedKey={dial.selected ? String(dial.selected.id) : undefined}
+        searchPlaceholder="Search country or code" onClose={() => setOpen(false)}
         onSelect={(country) => { dial.setSelected(country); onChange(`${country.dialCode}${local}`); setOpen(false); }} />
     </View>
   );
