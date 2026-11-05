@@ -7,9 +7,8 @@ import type { CatalogFiltersProps } from "@/interfaces/props/CatalogFiltersProps
 import { Button } from "../common/Button";
 import { Chip } from "../common/Chip";
 import { SelectSheet } from "../common/SelectSheet";
+import type { CountryKey } from "@/types/CountryKey";
 import { TextField } from "../common/TextField";
-
-type CountryKey = "startCountryId" | "endCountryId";
 
 /** From/to country pickers and a travel date range, like the web catalog filters. */
 export function CatalogFilters({ filter, active, onChange, onDate, onReset }: CatalogFiltersProps) {

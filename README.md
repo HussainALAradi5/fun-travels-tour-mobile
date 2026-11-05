@@ -25,6 +25,6 @@ Card top-up stays on the web app: Stripe card entry needs a native build, not Ex
 | `src/services` | One fetch client (token, timeout, error mapping, sign-out on 401) and a service per area |
 | `src/hooks`, `src/providers` | Screen logic, data loading, auth session (tokens in `expo-secure-store`) |
 | `src/components` | Shared UI (Button, TextField, SelectSheet, PhoneField, InfoRow, Avatar, ...) and domain components |
-| `src/config`, `constants`, `enums`, `interfaces`, `utilities` | Endpoints, theme, server enums, read models and props, formatting and file sharing |
+| `src/config`, `constants`, `enums`, `interfaces`, `types`, `utilities` | Endpoints, theme, server enums, read models and props, UI-only types, formatting and file sharing |
 
 Every screen maps to its web page and server endpoints in the [documentation repository](https://github.com/HussainALAradi5/fun-travels-tour-document) (`mobile/`).
