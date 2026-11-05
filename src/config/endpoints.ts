@@ -14,6 +14,7 @@ export const ENDPOINTS = {
     root: "/reservations",
     byId: (id: number) => `/reservations/${id}`,
     cancel: (id: number) => `/reservations/${id}/cancel`,
+    refundQuote: (id: number) => `/reservations/${id}/refund-quote`,
   },
   payments: {
     root: "/payments",
@@ -24,6 +25,7 @@ export const ENDPOINTS = {
     search: "/tickets/search",
     byId: (id: number) => `/tickets/${id}`,
     cancel: (id: number) => `/tickets/${id}/cancel`,
+    refundQuote: (id: number) => `/tickets/${id}/refund-quote`,
   },
   transactions: { byId: (id: number) => `/transactions/${id}` },
   accounts: {

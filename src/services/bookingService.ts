@@ -3,6 +3,7 @@ import { PaymentMethod } from "@/enums/PaymentMethod";
 import type { Reservation } from "@/interfaces/booking/Reservation";
 import type { ReservationCreateRequest } from "@/interfaces/booking/ReservationCreateRequest";
 import type { Ticket } from "@/interfaces/booking/Ticket";
+import type { RefundQuoteResponseDto } from "@/dtos/tour-management/RefundQuoteResponseDto";
 import type { PageRequest } from "@/interfaces/common/PageRequest";
 import type { PageResponse } from "@/interfaces/common/PageResponse";
 import { toQuery } from "@/utilities/format";
@@ -19,4 +20,7 @@ export const bookingService = {
   tickets: (reservationId: number) =>
     api.get<PageResponse<Ticket>>(ENDPOINTS.tickets.search + toQuery({ reservationId, size: 50 })),
   cancelTicket: (id: number) => api.put<Ticket>(ENDPOINTS.tickets.cancel(id)),
+  /** What cancelling now would refund, from the same rules as the cancellation. */
+  refundQuote: (id: number) => api.get<RefundQuoteResponseDto>(ENDPOINTS.reservations.refundQuote(id)),
+  ticketRefundQuote: (id: number) => api.get<RefundQuoteResponseDto>(ENDPOINTS.tickets.refundQuote(id)),
 };

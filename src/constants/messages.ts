@@ -7,7 +7,7 @@ export const MESSAGES = {
   emptyNotifications: "You are all caught up.",
   emptyTransactions: "No wallet activity yet.",
   cancelReservationTitle: "Cancel reservation?",
-  cancelReservationBody: "Paid bookings are refunded to your wallet: full refund more than 14 days before departure, 50% from 7 to 14 days, none inside 7 days.",
+  cancelReservationBody: "Paid bookings are refunded to your wallet under the agency's cancellation rules.",
   cancelTicketTitle: "Cancel this ticket?",
   resetSent: "If an account uses this email, a reset link has been sent.",
   resetDone: "Your password was changed. Sign in with the new password.",
