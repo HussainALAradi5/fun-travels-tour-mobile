@@ -1,6 +1,7 @@
 import { View } from "react-native";
 import { Avatar } from "@/components/common/Avatar";
 import { Button } from "@/components/common/Button";
+import { GenderPicker } from "@/components/common/GenderPicker";
 import { PhoneField } from "@/components/common/PhoneField";
 import { Screen } from "@/components/common/Screen";
 import { StateView } from "@/components/common/StateView";
@@ -17,6 +18,7 @@ export default function EditProfileScreen() {
       <Button label="Choose photo" variant="outline" onPress={() => void e.pickPhoto()} />
       {shown ? <Button label="Remove photo" variant="outline" onPress={e.clearPhoto} /> : null}
       <TextField label="Full name" value={e.name} onChangeText={e.setName} />
+      <GenderPicker label="Gender" value={e.gender} onChange={e.setGender} />
       <PhoneField label="Mobile number" value={e.mobile} onChange={e.setMobile} error={e.mobileError} />
       <TextField label="Age" keyboardType="number-pad" value={e.age} onChangeText={(t) => e.setAge(t.replace(/[^0-9]/g, ""))} />
       <Button label="Save" onPress={e.save} disabled={!e.canSave} loading={e.pending} />

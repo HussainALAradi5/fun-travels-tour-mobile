@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { Avatar } from "@/components/common/Avatar";
 import { Button } from "@/components/common/Button";
 import { Card } from "@/components/common/Card";
+import { GenderBadge } from "@/components/common/GenderBadge";
 import { InfoRow } from "@/components/common/InfoRow";
 import { LinkRow } from "@/components/common/LinkRow";
 import { Screen } from "@/components/common/Screen";
@@ -31,6 +32,7 @@ export default function ProfileScreen() {
             <View style={styles.flex}>
               <Text style={{ color: theme.text, fontSize: 22, fontWeight: "800" }}>{profile.name}</Text>
               <Text style={{ color: theme.muted }}>@{profile.userName} - {profile.userType}</Text>
+              <GenderBadge gender={profile.gender} />
             </View>
           </View>
           <Card>
@@ -43,7 +45,7 @@ export default function ProfileScreen() {
             {profile.wallet ? <InfoRow label="Wallet" value={formatMoney(profile.wallet.balance)} strong /> : null}
           </Card>
           <Card>
-            <LinkRow label="Edit profile" hint="Name, mobile, age, photo" onPress={() => router.push("/profile/edit")} />
+            <LinkRow label="Edit profile" hint="Name, gender, mobile, age, photo" onPress={() => router.push("/profile/edit")} />
             <LinkRow label="Support requests" hint="Ask for help or send a suggestion" onPress={() => router.push("/requests")} />
             <LinkRow label="My reports" hint="PDF and Excel exports" onPress={() => router.push("/reports")} />
             <LinkRow label="Booking payments" onPress={() => router.push("/payments")} />
@@ -55,4 +57,4 @@ export default function ProfileScreen() {
   );
 }
 
-const styles = StyleSheet.create({ header: { flexDirection: "row", alignItems: "center", gap: SPACING.lg }, flex: { flex: 1 } });
+const styles = StyleSheet.create({ header: { flexDirection: "row", alignItems: "center", gap: SPACING.lg }, flex: { flex: 1, gap: SPACING.xs } });

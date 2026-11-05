@@ -1,5 +1,6 @@
 import type { AgencySummaryDto } from "@/dtos/agency/AgencySummaryDto";
 import type { BranchSummaryDto } from "@/dtos/agency/BranchSummaryDto";
+import type { Gender } from "@/enums/Gender";
 
 /**
  * A user account as lists and sign-in return it.
@@ -12,6 +13,7 @@ export type UserResponseDto = {
   email: string;
   mobileNumber: string;
   age: number;
+  gender: Gender;
   userType: string;
   profileImageUrl: string;
   active: boolean;

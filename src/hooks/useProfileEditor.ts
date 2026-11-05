@@ -4,24 +4,27 @@ import { useCallback, useState } from "react";
 import { Alert } from "react-native";
 import { MESSAGES } from "@/constants/messages";
 import { MOBILE_PATTERN } from "@/constants/phone";
+import type { Gender } from "@/enums/Gender";
 import { profileService } from "@/services/profileService";
 import { useAction } from "./useAction";
 import { useAsync } from "./useAsync";
 import { useAuth } from "./useAuth";
 
-/** Edits name, mobile (with country code), age, and photo, then refreshes the signed-in user. */
+/** Edits name, gender, mobile (with country code), age, and photo, then refreshes the signed-in user. */
 export function useProfileEditor() {
   const { updateUser } = useAuth();
   const profile = useAsync(useCallback(() => profileService.mine(), []));
   // Only the user's edits are state; untouched fields show the loaded profile.
-  const [edits, setEdits] = useState<{ name?: string; mobile?: string; age?: string }>({});
+  const [edits, setEdits] = useState<{ name?: string; gender?: Gender; mobile?: string; age?: string }>({});
   const [photo, setPhoto] = useState<string | null>(null);
   const [removePhoto, setRemovePhoto] = useState(false);
   const { pending, run } = useAction();
   const name = edits.name ?? profile.data?.name ?? "";
+  const gender = edits.gender ?? profile.data?.gender ?? null;
   const mobile = edits.mobile ?? profile.data?.mobileNumber ?? "";
   const age = edits.age ?? (profile.data?.age ? String(profile.data.age) : "");
   const setName = (value: string) => setEdits((e) => ({ ...e, name: value }));
+  const setGender = (value: Gender) => setEdits((e) => ({ ...e, gender: value }));
   const setMobile = (value: string) => setEdits((e) => ({ ...e, mobile: value }));
   const setAge = (value: string) => setEdits((e) => ({ ...e, age: value }));
 
@@ -36,7 +39,7 @@ export function useProfileEditor() {
   const mobileError = mobile && !MOBILE_PATTERN.test(mobile) ? "Enter the number after the country code" : undefined;
   const save = () => run(async () => {
     const updated = await profileService.update({
-      name: name.trim(), mobileNumber: mobile, age: age ? Number(age) : undefined,
+      name: name.trim(), gender: gender ?? undefined, mobileNumber: mobile, age: age ? Number(age) : undefined,
       base64Image: photo ?? undefined, removeImage: removePhoto,
     });
     await updateUser(updated);
@@ -45,7 +48,7 @@ export function useProfileEditor() {
   });
 
   return {
-    profile, name, setName, mobile, setMobile, age, setAge, photo, pickPhoto, removePhoto,
+    profile, name, setName, gender, setGender, mobile, setMobile, age, setAge, photo, pickPhoto, removePhoto,
     clearPhoto: () => { setPhoto(null); setRemovePhoto(true); }, mobileError, save, pending,
     canSave: name.trim().length > 0 && !mobileError,
   };
