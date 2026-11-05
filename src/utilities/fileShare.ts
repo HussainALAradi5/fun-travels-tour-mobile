@@ -1,6 +1,6 @@
 import { File, Paths } from "expo-file-system";
 import * as Sharing from "expo-sharing";
-import { API_ORIGIN } from "@/config/api.config";
+import { API_BASE_URL } from "@/config/api.config";
 import type { MediaResponseDto } from "@/dtos/media/MediaResponseDto";
 import { sessionStorage } from "./secureStorage";
 
@@ -12,7 +12,7 @@ export async function downloadAndShare(media: MediaResponseDto): Promise<void> {
   const token = await sessionStorage.token();
   const destination = new File(Paths.cache, media.fileName);
   if (destination.exists) destination.delete();
-  const file = await File.createDownloadTask(API_ORIGIN + media.downloadPath, destination, {
+  const file = await File.createDownloadTask(API_BASE_URL + media.downloadPath, destination, {
     headers: token ? { Authorization: `Bearer ${token}` } : {},
   }).downloadAsync();
   if (!file) throw new Error("The download was interrupted.");
