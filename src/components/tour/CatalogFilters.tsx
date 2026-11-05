@@ -29,7 +29,7 @@ export function CatalogFilters({ filter, active, onChange, onDate, onReset }: Ca
       </View>
       {active ? <Button label="Clear filters" variant="outline" onPress={() => { setDates({ startDate: "", endDate: "" }); onReset(); }} /> : null}
       <SelectSheet<CountryResponseDto> visible={picking !== null} title="Country" items={countries} label={(c) => c.famousName}
-        keyOf={(c) => String(c.id)} onClose={() => setPicking(null)}
+        image={(c) => c.flagPngUrl} keyOf={(c) => String(c.id)} onClose={() => setPicking(null)}
         onSelect={(c) => { if (picking) onChange({ [picking]: c.id }); setPicking(null); }} />
     </View>
   );

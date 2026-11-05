@@ -6,6 +6,8 @@ export interface SelectSheetProps<T> {
   label: (item: T) => string;
   /** Optional right-hand detail, such as a dial code. */
   detail?: (item: T) => string;
+  /** Optional leading image, such as a country flag. */
+  image?: (item: T) => string | null | undefined;
   keyOf: (item: T) => string;
   onSelect: (item: T) => void;
   onClose: () => void;

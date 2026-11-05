@@ -4,10 +4,11 @@ import { SPACING, TOUCH_TARGET } from "@/constants/theme";
 import { useTheme } from "@/hooks/useTheme";
 import type { SelectSheetProps } from "@/interfaces/props/SelectSheetProps";
 import { Button } from "./Button";
+import { Flag } from "./Flag";
 import { TextField } from "./TextField";
 
 /** Full-screen searchable list for picking one item (countries, dial codes, ...). */
-export function SelectSheet<T>({ visible, title, items, label, detail, keyOf, onSelect, onClose }: SelectSheetProps<T>) {
+export function SelectSheet<T>({ visible, title, items, label, detail, image, keyOf, onSelect, onClose }: SelectSheetProps<T>) {
   const theme = useTheme();
   const [query, setQuery] = useState("");
   const visibleItems = useMemo(() => {
@@ -22,6 +23,7 @@ export function SelectSheet<T>({ visible, title, items, label, detail, keyOf, on
         <FlatList data={visibleItems} keyExtractor={keyOf} keyboardShouldPersistTaps="handled" renderItem={({ item }) => (
           <Pressable accessibilityRole="button" style={[styles.item, { borderColor: theme.border }]}
             onPress={() => { onSelect(item); setQuery(""); }}>
+            {image ? <Flag uri={image(item)} /> : null}
             <Text style={{ color: theme.text, flex: 1 }}>{label(item)}</Text>
             {detail ? <Text style={{ color: theme.muted }}>{detail(item)}</Text> : null}
           </Pressable>

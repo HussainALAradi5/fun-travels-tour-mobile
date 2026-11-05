@@ -5,6 +5,7 @@ import { RADIUS, SPACING, TOUCH_TARGET } from "@/constants/theme";
 import { useDialCodes } from "@/hooks/useDialCodes";
 import { useTheme } from "@/hooks/useTheme";
 import type { PhoneFieldProps } from "@/interfaces/props/PhoneFieldProps";
+import { Flag } from "./Flag";
 import { SelectSheet } from "./SelectSheet";
 
 /** Phone number with a country-code picker; reports the full "+<code><number>" value. */
@@ -21,6 +22,7 @@ export function PhoneField({ label, value, onChange, error }: PhoneFieldProps) {
       <View style={styles.row}>
         <Pressable accessibilityRole="button" accessibilityLabel={`Country code ${code}`} onPress={() => setOpen(true)}
           style={[styles.code, border]}>
+          <Flag uri={dial.selected?.flagPngUrl} width={20} />
           <Text style={{ color: theme.text, fontWeight: "700" }}>{code || "+"}</Text>
         </Pressable>
         <TextInput accessibilityLabel={label} keyboardType="phone-pad" value={local} placeholder="39990001"
@@ -29,7 +31,7 @@ export function PhoneField({ label, value, onChange, error }: PhoneFieldProps) {
       </View>
       <Text style={{ color: error ? theme.danger : theme.muted }}>{error ?? MOBILE_HINT}</Text>
       <SelectSheet visible={open} title="Country code" items={dial.countries} label={(c) => c.famousName}
-        detail={(c) => c.dialCode} keyOf={(c) => String(c.id)} onClose={() => setOpen(false)}
+        detail={(c) => c.dialCode} image={(c) => c.flagPngUrl} keyOf={(c) => String(c.id)} onClose={() => setOpen(false)}
         onSelect={(country) => { dial.setSelected(country); onChange(`${country.dialCode}${local}`); setOpen(false); }} />
     </View>
   );
@@ -39,6 +41,6 @@ const styles = StyleSheet.create({
   wrap: { gap: SPACING.xs },
   label: { fontWeight: "600" },
   row: { flexDirection: "row", gap: SPACING.sm },
-  code: { minHeight: TOUCH_TARGET, minWidth: 72, borderWidth: 1, borderRadius: RADIUS.md, alignItems: "center", justifyContent: "center" },
+  code: { minHeight: TOUCH_TARGET, minWidth: 72, borderWidth: 1, borderRadius: RADIUS.md, flexDirection: "row", gap: SPACING.xs, paddingHorizontal: SPACING.sm, alignItems: "center", justifyContent: "center" },
   input: { flex: 1, minHeight: TOUCH_TARGET, borderWidth: 1, borderRadius: RADIUS.md, paddingHorizontal: SPACING.md, fontSize: 16 },
 });
