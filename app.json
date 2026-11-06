@@ -30,11 +30,19 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "Allow Fun Travels Tour to use your photos for your profile picture."
+          "photosPermission": "Allow Fun Travels Tour to use your photos for your profile picture.",
+          "microphonePermission": false
         }
       ],
       "@react-native-community/datetimepicker"
     ],
-    "scheme": "funtravelstour"
+    "scheme": "funtravelstour",
+    "extra": {
+      "apiUrl": "https://fun-travels-tour-api.onrender.com",
+      "eas": {
+        "projectId": "5904cbe2-b775-4ca0-a62f-536746ddbe68"
+      }
+    },
+    "owner": "hussain_al_aradi"
   }
 }
