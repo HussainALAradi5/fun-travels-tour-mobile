@@ -2,6 +2,14 @@
 
 Expo (SDK 58, React Native 0.88) app with everything a customer does on the web app, against the same API: tour catalog with filters, booking with seats and meals, wallet payment, boarding pass with QR code, cancellations, wallet ledger and payments, notifications that open the related screen, support requests with replies, profile editing with photo and country-code phone, password reset, and PDF/Excel reports with a "My reports" list.
 
+## Try it on Android
+
+<img src="docs/android-install-qr.png" alt="QR code that downloads the Android APK" width="160" align="right" />
+
+Scan the code, or download the APK: **[fun-travels-tour.apk](https://expo.dev/artifacts/eas/gk8X_woGO39agq-bTTbpYPh7LOqAFIt7Jp4CaBMhcv8.apk)** (79 MB). Android asks once to allow installs from your browser, since the app is not from the Play Store. It uses the live API on Render, whose free plan sleeps: the first screen can take up to a minute.
+
+A new APK comes from `npx eas-cli build -p android --profile preview` (see `eas.json`).
+
 ## Run
 
 ```bash
